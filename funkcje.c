@@ -49,7 +49,7 @@ void wypisz(dinozaury *head){
     while (a!=NULL){
         printf("\n ====== %s ====== \n", a->gatunek);
         printf("dieta: %s \n", a->dieta);
-        printf("masa: %f \n", a->masa);
+        printf("masa: %.1f \n", a->masa);
         printf("zagroda: %s \n", a->zagroda);
         printf("temperament: %s \n", a->temperament);
         printf("status bezpieczenstwa: %s \n", a->status);
@@ -63,5 +63,28 @@ void zwolnienieListy(dinozaury *head){
         t=head;
         head=head->next;
         free(t);
+    }
+}
+
+void wyszukiwanie(dinozaury *head){
+    char sz[20];
+    dinozaury *a=head;
+    int z=0;
+    printf("\npodaj gatunek dinozaura do znalezienia: ");
+    wczytywanieT(sz, 20);
+    while(a!=NULL){
+        if (strcmp(a->gatunek,sz)==0){
+            printf("\nznalezione dinozaury: \n");
+            printf("dieta: %s \n", a->dieta);
+            printf("masa: %.1f \n", a->masa);
+            printf("zagroda: %s \n", a->zagroda);
+            printf("temperament: %s \n", a->temperament);
+            printf("status bezpieczenstwa: %s \n", a->status);
+            z=1;
+        }
+    a=a->next;
+    }
+    if (z==0){
+        printf("nie ma dinozaura o takiej nazwie");
     }
 }

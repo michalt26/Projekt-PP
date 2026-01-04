@@ -5,21 +5,25 @@
 int main()
 {
     dinozaury *head=NULL;
-    int opcja=0;
-    while(opcja!=3){
+    int opcja=99;
+    while(opcja!=0){
         printf("\n ======= MENU ======= \n");
         printf("1-dodaj nowego dinozaura\n");
         printf("2-wyswietl liste dinozaurow\n");
-        printf("3-zakoncz dzialanie programu\n");
+        printf("3-wyszukiwanie dinozaura po gatunku\n");
+        printf("0-zakoncz dzialanie programu\n");
         printf("opcja: ");
         if (scanf("%d",&opcja)!=1){
             while(getchar()!='\n');
-            opcja=0;
+            opcja=-1;
         }
         else{
             while(getchar()!='\n');
         }
         switch(opcja){
+            case 0:
+                zwolnienieListy(head);
+                break;
             case 1:
                 dodaj(&head);
                 break;
@@ -27,7 +31,7 @@ int main()
                 wypisz(head);
                 break;
             case 3:
-                zwolnienieListy(head);
+                wyszukiwanie(head);
                 break;
             default:
                 printf("!! wprowadz poprawny numer !! \n");

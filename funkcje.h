@@ -13,4 +13,5 @@ typedef struct dinozaury{
 void dodaj(dinozaury **head);
 void wypisz(dinozaury *head);
 void zwolnienieListy(dinozaury *head);
+void wyszukiwanie(dinozaury *head);
 #endif
