@@ -14,4 +14,6 @@ void dodaj(dinozaury **head);
 void wypisz(dinozaury *head);
 void zwolnienieListy(dinozaury *head);
 void wyszukiwanie(dinozaury *head);
+void modyfikacja(dinozaury *head);
+void usuwanie(dinozaury **head);
 #endif
