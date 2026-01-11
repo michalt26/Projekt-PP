@@ -178,3 +178,56 @@ void usuwanie(dinozaury **head){
     }
     printf("nie ma dinozaura o podanym gatunku\n");
 }
+
+void zapis (dinozaury *head){
+    dinozaury *a=head;
+    FILE *plik;
+    char nazwa[100];
+    printf("\npodaj nazwe pliku\n");
+    scanf("%s",nazwa);
+    plik=fopen(nazwa, "w");
+    if (plik==NULL){
+        printf("\n !! nie mozna zapisac pliku !! \n");
+        return;
+    }
+    while(a!=NULL){
+        printf("zapisywanie %s...\n", a->gatunek);
+        fprintf(plik, "%s\n", a->gatunek);
+        fprintf(plik, "%s\n", a->dieta);
+        fprintf(plik, "%.1f\n", a->masa);
+        fprintf(plik, "%s\n", a->zagroda);
+        fprintf(plik, "%s\n", a->temperament);
+        fprintf(plik, "%s\n", a->status);
+        a=a->next;
+    }
+    fclose(plik);
+    printf("\nzapisano baze do pliku %s\n", nazwa);
+}
+
+void wczytywanie(dinozaury **head){
+    FILE *plik;
+    char bufor[50];
+    char nazwa[100];
+    zwolnienieListy(*head); // zeby sie nie wczytalo 2 razy to samo
+    *head=NULL;
+    printf("\npodaj nazwe pliku\n");
+    scanf("%s",nazwa);
+    plik=fopen(nazwa, "r");
+    if (plik==NULL){
+        printf("\n !! nie ma pliku o podanej nazwie %s !! \n", nazwa);
+        return;
+    }
+    while (fscanf(plik,"%s",bufor)!=EOF){
+        dinozaury *nowy=(dinozaury*)malloc(sizeof(dinozaury));
+        strcpy(nowy->gatunek,bufor);
+        fscanf(plik, "%s", nowy->dieta);
+        fscanf(plik, "%f", &nowy->masa);
+        fscanf(plik, "%s", nowy->zagroda);
+        fscanf(plik, "%s", nowy->temperament);
+        fscanf(plik, "%s", nowy->status);
+        nowy->next=*head;
+        *head=nowy;  //dodanie na poczatek
+    }
+    fclose(plik);
+    printf("\nwczytano baze z pliku %s\n",nazwa);
+}
